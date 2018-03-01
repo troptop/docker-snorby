@@ -90,6 +90,6 @@ Example:
         
 ## Author
   
-Author: Cymatic (<info@cymatic.eu>) - www.cymatic.eu
+Author: [Cymatic](http://www.cymatic.eu) (<info@cymatic.eu>) - [www.cymatic.eu](http://www.cymatic.eu)
 
 ---
