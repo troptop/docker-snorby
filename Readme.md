@@ -73,7 +73,7 @@ This example will create a container that :
 
 ### Access Snorby web interface
 Visit your `snorby_ip:port` to access snorby interface and use default credentials:  
-Username: **snorby@snorby.org**  
+Username: **snorby@example.com**  
 Password: **snorby**  
 ### Database deployment 
 To be able to connect to database we would need one to be running first. Easiest way to do that is to use another docker image. 
