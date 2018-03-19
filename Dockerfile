@@ -1,6 +1,5 @@
 FROM debian:8
 
-RUN apt-get update -y
 ENV MYSQL_ADMIM  ""
 ENV MYSQL_ADMINPASS ""
 ENV MYSQL_HOST ""
@@ -17,12 +16,14 @@ WORKDIR /opt
 COPY jinja-snorby-conf.py .
 COPY database.yml.template .
 COPY entrypoint.sh /opt/
-
-RUN apt-get -y install mysql-client ruby-dev ruby-bcrypt ruby-redcloth postgresql-server-dev-all bundler build-essential vim git wget libtool automake gcc flex bison libnet1 libnet1-dev libpcre3 libpcre3-dev autoconf libcrypt-ssleay-perl libwww-perl git zlib1g zlib1g-dev libmysqlclient-dev apache2 imagemagick wkhtmltopdf ruby libyaml-dev libxml2-dev libxslt1-dev openssl libreadline6-dev unzip libcurl4-openssl-dev libapache2-mod-passenger libapr1-dev libaprutil1-dev tzdata python-jinja2
+COPY snorby_config.yml .
+RUN apt-get update -y
+RUN apt-get -y install mysql-client ruby-dev ruby-bcrypt ruby-redcloth postgresql-server-dev-all bundler build-essential vim git wget libtool automake gcc flex bison libnet1 libnet1-dev libpcre3 libpcre3-dev autoconf libcrypt-ssleay-perl libwww-perl git zlib1g zlib1g-dev libmysqlclient-dev apache2 imagemagick wkhtmltopdf ruby libyaml-dev libxml2-dev libxslt1-dev openssl libreadline6-dev unzip libapache2-mod-passenger libapr1-dev libaprutil1-dev tzdata python-jinja2 libcurl4-openssl-dev
 RUN wget -O snorby.zip --no-check-certificate https://github.com/Snorby/snorby/archive/master.zip
 RUN unzip snorby.zip && mv snorby-master/ /var/www/html/snorby
 WORKDIR /var/www/html/snorby
-# Docker bug with other nokogiri version (can not compile)
+# Docker bug with other nokogiri version (can not compile)libcurl4-openssl-dev
+RUN apt-get update -y
 RUN apt-get install -y ruby-nokogiri ruby-libxml libxml2-dev libxml2 libxslt1.1 libxslt1-dev  liblzma5 liblzma-dev build-essential patch ruby-dev zlib1g-dev liblzma-dev pkg-config
 #RUN bundle update nokogiri
 #RUN gem install pkg-config -v "~> 1.1" 
@@ -42,7 +43,7 @@ RUN echo "<virtualhost *:80> \n\
         ErrorLog ${APACHE_LOG_DIR}/snorby-error.log\n\
         CustomLog ${APACHE_LOG_DIR}/snorby-access.log combined\n\
 </virtualhost>" > /etc/apache2/sites-enabled/000-default.conf
-RUN cp config/snorby_config.yml.example config/snorby_config.yml
+RUN cp -f /opt/snorby_config.yml config/snorby_config.yml
 EXPOSE 80
 RUN chmod +x /opt/entrypoint.sh
 ENTRYPOINT ["/opt/entrypoint.sh"]
