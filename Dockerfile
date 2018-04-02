@@ -14,7 +14,6 @@ ENV ADD_DBUSER "false"
 
 WORKDIR /opt
 COPY jinja-snorby-conf.py .
-COPY envvars  /etc/apache2/envvars
 COPY database.yml.template .
 COPY entrypoint.sh /opt/
 COPY snorby_config.yml .
@@ -29,6 +28,7 @@ RUN apt-get install -y ruby-nokogiri ruby-libxml libxml2-dev libxml2 libxslt1.1 
 #RUN bundle update nokogiri
 #RUN gem install pkg-config -v "~> 1.1" 
 #RUN gem install nokogiri -v '1.6.6.2'
+COPY envvars  /etc/apache2/envvars
 #RUN gem install nokogiri -- --use-system-libraries --with-xml2-include=/usr/include/libxml2/libxml --with-xml2-dir=/usr/lib/x86_64-linux-gnu/
 RUN  bundle config build.nokogiri --use-system-libraries  --with-xml2-dir=/usr/lib/x86_64-linux-gnu/
 RUN bundle install
