@@ -113,4 +113,4 @@ rails runner "Snorby::Jobs::GeoipUpdatedbJob.new(true).perform"
 rails runner "Snorby::Jobs.clear_cache"
 rails runner "Snorby::Jobs.run_now!"
 
-/usr/sbin/apache2 -DFOREGROUND
+apache2ctl -D FOREGROUND
