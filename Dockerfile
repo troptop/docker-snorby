@@ -14,6 +14,7 @@ ENV ADD_DBUSER "false"
 
 WORKDIR /opt
 COPY jinja-snorby-conf.py .
+COPY envvars  /etc/apache2/envvars
 COPY database.yml.template .
 COPY entrypoint.sh /opt/
 COPY snorby_config.yml .
