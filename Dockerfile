@@ -1,4 +1,4 @@
-FROM debian:8
+FROM ubuntu:latest
 
 ENV MYSQL_ADMIM  ""
 ENV MYSQL_ADMINPASS ""
